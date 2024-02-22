@@ -1,24 +1,22 @@
 #!/bin/bash
 
-URL_DEL_STREAM="srt://DIRECCION_DEL_SERVIDOR:PUERTO/STREAM"
+# URL del servidor SRT
+URL_DEL_STREAM="srt://38.91.100.244:5124"
 
-# Función para verificar la conectividad a Internet
+# Función para verificar la conexión a Internet
 verificar_conexion() {
     ping -c 1 google.com > /dev/null 2>&1
     return $?
 }
 
+# Bucle para reproducir el flujo SRT de forma continua
 while true; do
-    # Verificar la conectividad a Internet
-    verificar_conexion
-    CONEXION=$?
-
-    if [ $CONEXION -eq 0 ]; then
-        # Si hay conexión a Internet, intentar reproducir el flujo SRT
-        ffmpeg -hide_banner -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5 -i "$URL_DEL_STREAM" -vf "fullscreen" -nostats -loglevel 0 -nostdin -autoexit -f null -
+    # Verificar la conexión a Internet
+    if verificar_conexion; then
+        # Reproducir el flujo SRT en pantalla completa con MPV
+        mpv --fs "$URL_DEL_STREAM"
     else
-        # Si no hay conexión a Internet, esperar y volver a intentar
-        echo "Conexión a Internet perdida. Reintentando en 10 segundos..."
+        echo "No hay conexión a Internet. Reiniciando el script en 10 segundos..."
         sleep 10
     fi
 done
