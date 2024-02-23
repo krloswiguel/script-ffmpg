@@ -1,3 +1,16 @@
 sudo apt update
 ffmpeg
-mpv player 
+sudo apt update
+sudo apt install mpv 
+sudo apt install libva-dev
+vainfo
+sudo apt install libsdl2-dev
+gnome-session-properties
+chmod +x srt.sh
+./srt.sh
+
+
+otros posibles
+apt-get install cinnamon-session
+ Ubuntu
+apt-get install cinnamon-session
