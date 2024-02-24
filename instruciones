@@ -5,9 +5,13 @@ sudo apt install mpv
 sudo apt install libva-dev
 vainfo
 sudo apt install libsdl2-dev
-gnome-session-properties
+export XDG_RUNTIME_DIR=/run/user/$UID~/.bashrc
+
+gnome-session-properties *opcional
+
 chmod +x srt.sh
 ./srt.sh
+
 
 
 otros posibles
