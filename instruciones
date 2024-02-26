@@ -6,15 +6,53 @@ sudo apt install libva-dev
 vainfo
 sudo apt install libsdl2-dev
 export XDG_RUNTIME_DIR=/run/user/$UID~/.bashrc
-
-gnome-session-properties *opcional
-
+--------------------------------------------------------------
+gnome-session-properties *opcional inicio de script atomatico
+--------------------------------------------------------
 chmod +x srt.sh
 ./srt.sh
 
 
-
-otros posibles
+------------------------------------------------------------------------------------------
+otros posibles para inicio de script automatico 
 apt-get install cinnamon-session
  Ubuntu
 apt-get install cinnamon-session
+-------------------------------------------------------------------------------------
+opcional si usa gnoma para el inicio directo sin cotraseña
+
+Abre el archivo de configuración slick-greeter.conf en un editor de texto. Puedes usar nano u otro editor de tu elección:
+bash
+Copy code
+
+****  sudo nano /etc/lightdm/slick-greeter.conf
+
+Dentro del archivo de configuración, busca la sección [Seat:*].
+
+Agrega la siguiente línea dentro de la sección [Seat:*] para configurar el inicio automático de sesión:
+
+plaintext
+Copy code
+******  autologin-user=tu_nombre_de_usuario
+
+******  sudo systemctl restart lightdm
+
+Crea un archivo de configuración para LightDM si no existe. Puedes crearlo como lightdm.conf en el directorio /etc/lightdm/ si no está presente:
+bash
+Copy code
+*******  sudo nano /etc/lightdm/lightdm.conf
+Agrega el siguiente contenido al archivo lightdm.conf:
+plaintext
+Copy code
+[Seat:*]
+autologin-user=tu_usuario
+autologin-user-timeout=0
+Asegúrate de reemplazar tu_usuario con el nombre de usuario de la cuenta que deseas que inicie sesión automáticamente.
+
+Guarda el archivo y ciérralo.
+
+Reinicia LightDM para aplicar los cambios:
+
+bash
+Copy code
+*************** sudo systemctl restart lightdm
