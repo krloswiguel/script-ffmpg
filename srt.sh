@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # URL del servidor SRT
-URL_DEL_STREAM="srt://38.91.100.244:5124"
+URL_DEL_STREAM="srt://IP_DOMINIO:PUERTO"
 
 # Función para verificar la conexión a Internet
 verificar_conexion() {
