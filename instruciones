@@ -1,11 +1,22 @@
-sudo apt update
-ffmpeg
-sudo apt update
-sudo apt install mpv 
-sudo apt install libva-dev
-vainfo
-sudo apt install libsdl2-dev
-export XDG_RUNTIME_DIR=/run/user/$UID~/.bashrc
+sudo apt Este comando realizará las siguientes acciones:
+
+Actualizará la lista de paquetes (apt update).
+Instalará ffmpeg, mpv, libva-dev, y libsdl2-dev.
+Ejecutará vainfo para mostrar información sobre VA-API (aceleración de video por hardware).
+Agregará la exportación de XDG_RUNTIME_DIR al archivo ~/.bashrc para establecer el directorio de ejecución del entorno de usuario.
+sudo apt
+
+
+update && sudo apt install -y ffmpeg mpv libva-dev libsdl2-dev && vainfo && echo "export XDG_RUNTIME_DIR=/run/user/$UID" >> ~/.bashrc
+--------------------------------------------------------------
+creacion de archivo sh scrip
+ 
+sudo nano srt.sh
+
+chmod +x srt.sh
+./srt.sh
+
+
 --------------------------------------------------------------
 gnome-session-properties *opcional inicio de script atomatico
 --------------------------------------------------------
