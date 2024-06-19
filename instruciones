@@ -1,24 +1,90 @@
-sudo apt Este comando realizará las siguientes acciones:
+ sudo apt Este comando realizará las siguientes acciones:
 
 Actualizará la lista de paquetes (apt update).
 Instalará ffmpeg, mpv, libva-dev, y libsdl2-dev.
 Ejecutará vainfo para mostrar información sobre VA-API (aceleración de video por hardware).
-Agregará la exportación de XDG_RUNTIME_DIR al archivo ~/.bashrc para establecer el directorio de ejecución del entorno de usuario.
+Agregará la exportación de XDG_RUNTIME_DIR al archivo ~/.bashrc para establecer el directorio de ejecución 
+del entorno de usuario.
 sudo apt
 
 
 update && sudo apt install -y ffmpeg mpv libva-dev libsdl2-dev && vainfo && echo "export XDG_RUNTIME_DIR=/run/user/$UID" >> ~/.bashrc
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+ Para que un script se ejecute al inicio del sistema en Armbian, Puedes crear un archivo de
+unidad systemd en esta carpeta para iniciar y gestionar tu script como un servicio. Esto proporciona
+más flexibilidad y control sobre cómo se inicia y se detiene el script.
+
+    cd /etc/systemd/system/
+
+crear archivo sh script
+
+     sudo nano srt.sh
+
+     sudo chmod +x /etc/systemd/system/srt.sh
+
+
+     sudo nano /etc/systemd/system/srt.service
+
+***************************************************dento del archivo nano
+[Unit]
+Description=Descripción de tu script
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/etc/systemd/system/srt.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+***************************************************************
+Después de guardar el archivo, necesitas recargar systemd para que tome en cuenta los cambios
+  
+    sudo systemctl daemon-reload
+
+Luego, habilita el servicio para que se inicie automáticamente al inicio:
+
+      sudo systemctl enable srt.service
+
+Finalmente, puedes iniciar el servicio para ejecutar el script de inmediato:
+bash
+
+
+      sudo systemctl start srt.service
+
+Con estos pasos, el script srt.sh se ejecutará automáticamente al inicio del sistema. 
+Puedes verificar si está en ejecución usando:
+
+
+        sudo systemctl status srt.service
+
+Si hay algún problema, puedes revisar los registros para obtener más detalles:
+
+
+         journalctl -xe
+Esto debería ayudarte a configurar tu script para que se ejecute automáticamente
+al inicio del sistema en Armbian utilizando systemd.
+
+
+estos comados son para probar script
+       sudo nano srt.sh
+
+       chmod +x srt.sh
+       ./srt.sh
 --------------------------------------------------------------
-creacion de archivo sh scrip
- 
-sudo nano srt.sh
 
-chmod +x srt.sh
-./srt.sh
+--------------------------------------------------------------
+
+
+
+
 
 
 --------------------------------------------------------------
-gnome-session-properties *opcional inicio de script atomatico
+*opcional inicio de script atomatico con ubuntu con interfas grafica 
 --------------------------------------------------------
 chmod +x srt.sh
 ./srt.sh
@@ -30,13 +96,18 @@ apt-get install cinnamon-session
  Ubuntu
 apt-get install cinnamon-session
 -------------------------------------------------------------------------------------
+
+
+
+
+
 opcional si usa gnoma para el inicio directo sin cotraseña
 
 Abre el archivo de configuración slick-greeter.conf en un editor de texto. Puedes usar nano u otro editor de tu elección:
 bash
-Copy code
+Copy code***
 
-****  sudo nano /etc/lightdm/slick-greeter.conf
+sudo nano /etc/lightdm/slick-greeter.conf
 
 Dentro del archivo de configuración, busca la sección [Seat:*].
 
